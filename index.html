@@ -21,7 +21,8 @@
     </canvas>
     <script>
         const canvasEl = document.querySelector("canvas"),
-            canvasCtx = canvasEl.getContext("2d");
+            canvasCtx = canvasEl.getContext("2d"),
+            gapX = 10;
 
         const lineWidth = 15; //Largura da linha central do campo
 
@@ -41,13 +42,37 @@
             w: 15,
             h: field.h,
             draw: function () {
-                canvasCtx.fillStyle = "#ffffff"; //Definição da cor da linha, raquetes e bolinha.
+                canvasCtx.fillStyle = "#ffffff"; //Definição da cor da linha.
                 canvasCtx.fillRect(field.w / 2 - this.w / 2, 0, this.w, this.h);
                 //Desenhando a linha central.
                     //FIELD.W defini o centro da tela e divide a largura da linha para centralizar.
                     //THIS.W Define a largura da linha.
                     //0 define onde irá iniciar a linha central (altura)
                     //THIS.H define a altura da linha.
+            }
+        }
+
+        //Objeto Raquete Esquerda
+        const leftPaddle = {
+            x: gapX,
+            y: 100,
+            w: line.w,
+            h:200,
+            draw: function() {
+                canvasCtx.fillStyle = "#ffffff";//Definição da cor da raquete.
+                canvasCtx.fillRect(this.x, this.y, this.w, this.h); //Desenhando a raquete esquerda
+            }
+        }
+
+        //Objeto Raquete Direita
+        const rightPaddle = {
+            x: field.w - line.w - gapX,
+            y: 100,
+            w: line.w,
+            h:200,
+            draw: function() {
+                canvasCtx.fillStyle = "#ffffff";//Definição da cor da raquete.
+                canvasCtx.fillRect(this.x, this.y, this.w, this.h); //Desenhando a raquete esquerda
             }
         }
 
@@ -60,16 +85,9 @@
         function draw() {
             field.draw();
             line.draw();
-
-            //Desenhando a raquete esquerda
-            canvasCtx.fillRect(10, 400, lineWidth, 200);
-
-            //Desenhando a raquete direita
-            canvasCtx.fillRect(window.innerWidth - lineWidth - 10, //Calculo para posicionamento da raquete direita.
-                400,
-                lineWidth,
-                200);
-
+            leftPaddle.draw();
+            rightPaddle.draw();
+            
             //Desenhando a bolinha do jogo
             canvasCtx.beginPath();
             canvasCtx.arc(200, 300, 20, 0, 2 * Math.PI, false);
