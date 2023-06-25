@@ -76,12 +76,26 @@
             }
         }
 
+        //Objeto Placar
+        const score = {
+            human: 1,
+            computer: 2,
+            draw: function () { //Desenhando o Placar
+                canvasCtx.font = "bold 72px Arial"; //Dados da fonte utilizada.
+                canvasCtx.textAlign = "center"; //Alinhamento do texto.
+                canvasCtx.textBaseline = "top"; //Alinhamento da altura do texto.
+                canvasCtx.fillStyle = "#01341D"; //Definição da cor do texto.
+                canvasCtx.fillText(this.human, field.w / 4, 50); //Definição esquerda da posição do texto sobre o campo.
+                canvasCtx.fillText(this.computer, field.w / 4 + field.w / 2, 50); //Definição direita da posição do texto sobre o campo.
+            }
+        }
+
         //Objeto Bolinha
         const ball = {
             x: 300,
             y: 200,
             r: 20,
-            draw: function() {  //Desenhando a bolinha do jogo
+            draw: function () {  //Desenhando a bolinha do jogo
                 canvasCtx.fillStyle = "#ffffff";//Definição da cor da bolinha.
                 canvasCtx.beginPath();
                 canvasCtx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
@@ -99,17 +113,15 @@
         function draw() {
             field.draw();
             line.draw();
+
             leftPaddle.draw();
             rightPaddle.draw();
+
+            score.draw();
+
             ball.draw();
 
-            //Desenhando o Placar
-            canvasCtx.font = "bold 72px Arial"; //Dados da fonte utilizada.
-            canvasCtx.textAlign = "center"; //Alinhamento do texto.
-            canvasCtx.textBaseline = "top"; //Alinhamento da altura do texto.
-            canvasCtx.fillStyle = "#01341D"; //Definição da cor do texto.
-            canvasCtx.fillText("3", window.innerWidth / 4, 50); //Definição esquerda da posição do texto sobre o campo.
-            canvasCtx.fillText("1", window.innerWidth / 4 + window.innerWidth / 2, 50); //Definição direita da posição do texto sobre o campo.
+
         }
 
         //Desenhando os elementos do projeto.
