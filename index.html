@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo Ping Pong</title>
-    <style>
+    <!-- Aplicação de estilização com CSS -->
+    <style> 
         * {
             overflow: hidden;
             margin: 0;
@@ -21,15 +22,18 @@
               canvasCtx = canvasEl.getContext("2d");
 
               function setup() {
+                // Configurando o tamanho do fundo do jogo (gramado).
                 canvasEl.width = canvasCtx.width = window.innerWidth;
                 canvasEl.height = canvasCtx.height = window.innerHeight;
               }
 
               function draw() {
-                canvasCtx.fillStyle = "#286047";
-                canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight);
+                //Configurando o fundo (gramado).
+                canvasCtx.fillStyle = "#286047"; //Definição da cor de fundo.
+                canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight); //Definição do local da cor de fundo sobre a página.
               }
 
+              //Desenhando os elementos do projeto.
               setup();
               draw();
     </script>
