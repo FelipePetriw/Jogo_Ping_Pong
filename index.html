@@ -45,10 +45,10 @@
                 canvasCtx.fillStyle = "#ffffff"; //Definição da cor da linha.
                 canvasCtx.fillRect(field.w / 2 - this.w / 2, 0, this.w, this.h);
                 //Desenhando a linha central.
-                    //FIELD.W defini o centro da tela e divide a largura da linha para centralizar.
-                    //THIS.W Define a largura da linha.
-                    //0 define onde irá iniciar a linha central (altura)
-                    //THIS.H define a altura da linha.
+                //FIELD.W defini o centro da tela e divide a largura da linha para centralizar.
+                //THIS.W Define a largura da linha.
+                //0 define onde irá iniciar a linha central (altura)
+                //THIS.H define a altura da linha.
             }
         }
 
@@ -57,8 +57,8 @@
             x: gapX,
             y: 100,
             w: line.w,
-            h:200,
-            draw: function() {
+            h: 200,
+            draw: function () {
                 canvasCtx.fillStyle = "#ffffff";//Definição da cor da raquete.
                 canvasCtx.fillRect(this.x, this.y, this.w, this.h); //Desenhando a raquete esquerda
             }
@@ -69,10 +69,24 @@
             x: field.w - line.w - gapX,
             y: 100,
             w: line.w,
-            h:200,
-            draw: function() {
+            h: 200,
+            draw: function () {
                 canvasCtx.fillStyle = "#ffffff";//Definição da cor da raquete.
                 canvasCtx.fillRect(this.x, this.y, this.w, this.h); //Desenhando a raquete esquerda
+            }
+        }
+
+        //Objeto Bolinha
+        const ball = {
+            x: 300,
+            y: 200,
+            r: 20,
+            draw: function() {  //Desenhando a bolinha do jogo
+                canvasCtx.fillStyle = "#ffffff";//Definição da cor da bolinha.
+                canvasCtx.beginPath();
+                canvasCtx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
+                canvasCtx.fill();
+                // Como não existe um elemento em circulo é utilizado o Raio de PI para montar o elemento redondo.
             }
         }
 
@@ -87,12 +101,7 @@
             line.draw();
             leftPaddle.draw();
             rightPaddle.draw();
-            
-            //Desenhando a bolinha do jogo
-            canvasCtx.beginPath();
-            canvasCtx.arc(200, 300, 20, 0, 2 * Math.PI, false);
-            canvasCtx.fill();
-            // Como não existe um elemento em circulo é utilizado o Raio de PI para montar o elemento redondo.
+            ball.draw();
 
             //Desenhando o Placar
             canvasCtx.font = "bold 72px Arial"; //Dados da fonte utilizada.
