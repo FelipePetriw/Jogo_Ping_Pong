@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo Ping Pong</title>
     <!-- Aplicação de estilização com CSS -->
-    <style> 
+    <style>
         * {
             overflow: hidden;
             margin: 0;
@@ -13,29 +14,43 @@
         }
     </style>
 </head>
+
 <body>
     <canvas>
 
     </canvas>
     <script>
-        const canvasEl = document.querySelector("canvas"), 
-              canvasCtx = canvasEl.getContext("2d");
+        const canvasEl = document.querySelector("canvas"),
+            canvasCtx = canvasEl.getContext("2d");
 
-              function setup() {
-                // Configurando o tamanho do fundo do jogo (gramado).
-                canvasEl.width = canvasCtx.width = window.innerWidth;
-                canvasEl.height = canvasCtx.height = window.innerHeight;
-              }
+        const lineWidth = 15; //Largura da linha central do campo
 
-              function draw() {
-                //Configurando o fundo (gramado).
-                canvasCtx.fillStyle = "#286047"; //Definição da cor de fundo.
-                canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight); //Definição do local da cor de fundo sobre a página.
-              }
+        function setup() {
+            // Configurando o tamanho do fundo do jogo (gramado).
+            canvasEl.width = canvasCtx.width = window.innerWidth;
+            canvasEl.height = canvasCtx.height = window.innerHeight;
+        }
 
-              //Desenhando os elementos do projeto.
-              setup();
-              draw();
+        function draw() {
+            //Configurando o fundo (gramado).
+            canvasCtx.fillStyle = "#286047"; //Definição da cor de fundo.
+            canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight); //Definição do local da cor de fundo sobre a página.
+
+            canvasCtx.fillStyle = "#ffffff"; //Definição da cor da linha central.
+
+            //Desenha a linha central.
+            canvasCtx.fillRect(
+                window.innerWidth / 2 - lineWidth / 2, //Defini o centro da tela e divide a largura da linha para centralizar.
+                0, //Define onde irá iniciar a linha central (altura)
+                lineWidth, //Define a largura da linha.
+                window.innerHeight //Define a altura da linha.
+            );
+        }
+
+        //Desenhando os elementos do projeto.
+        setup();
+        draw();
     </script>
 </body>
+
 </html>
