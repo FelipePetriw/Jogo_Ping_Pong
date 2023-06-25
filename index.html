@@ -45,6 +45,15 @@
                 lineWidth, //Define a largura da linha.
                 window.innerHeight //Define a altura da linha.
             );
+
+            //Desenhando a raquete esquerda
+            canvasCtx.fillRect(10, 400, lineWidth, 200);
+
+            //Desenhando a raquete direita
+            canvasCtx.fillRect(window.innerWidth - lineWidth - 10, //Calculo para posicionamento da raquete direita.
+                400,
+                lineWidth,
+                200);
         }
 
         //Desenhando os elementos do projeto.
