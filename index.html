@@ -36,6 +36,21 @@
             }
         }
 
+        //Objeto Linha Central
+        const line = {
+            w: 15,
+            h: field.h,
+            draw: function () {
+                canvasCtx.fillStyle = "#ffffff"; //Definição da cor da linha, raquetes e bolinha.
+                canvasCtx.fillRect(field.w / 2 - this.w / 2, 0, this.w, this.h);
+                //Desenhando a linha central.
+                    //FIELD.W defini o centro da tela e divide a largura da linha para centralizar.
+                    //THIS.W Define a largura da linha.
+                    //0 define onde irá iniciar a linha central (altura)
+                    //THIS.H define a altura da linha.
+            }
+        }
+
         function setup() {
             // Configurando o tamanho do fundo do jogo (gramado).
             canvasEl.width = canvasCtx.width = window.innerWidth;
@@ -44,16 +59,7 @@
 
         function draw() {
             field.draw();
-
-            canvasCtx.fillStyle = "#ffffff"; //Definição da cor da linha central, raquetes e bolinha.
-
-            //Desenha a linha central.
-            canvasCtx.fillRect(
-                window.innerWidth / 2 - lineWidth / 2, //Defini o centro da tela e divide a largura da linha para centralizar.
-                0, //Define onde irá iniciar a linha central (altura)
-                lineWidth, //Define a largura da linha.
-                window.innerHeight //Define a altura da linha.
-            );
+            line.draw();
 
             //Desenhando a raquete esquerda
             canvasCtx.fillRect(10, 400, lineWidth, 200);
