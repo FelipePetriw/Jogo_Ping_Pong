@@ -25,6 +25,17 @@
 
         const lineWidth = 15; //Largura da linha central do campo
 
+        //Objeto Campo (tela de fundo/gramado)
+        const field = {
+            w: window.innerWidth, //Definido a largura.
+            h: window.innerHeight, //Definido a largura.
+            draw: function () { //Chama a função de construção.
+                //Configurando o fundo (gramado).
+                canvasCtx.fillStyle = "#286047"; //Definição da cor de fundo.
+                canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight); //Definição do local da cor de fundo sobre a página.
+            }
+        }
+
         function setup() {
             // Configurando o tamanho do fundo do jogo (gramado).
             canvasEl.width = canvasCtx.width = window.innerWidth;
@@ -32,9 +43,7 @@
         }
 
         function draw() {
-            //Configurando o fundo (gramado).
-            canvasCtx.fillStyle = "#286047"; //Definição da cor de fundo.
-            canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight); //Definição do local da cor de fundo sobre a página.
+            field.draw();
 
             canvasCtx.fillStyle = "#ffffff"; //Definição da cor da linha central, raquetes e bolinha.
 
