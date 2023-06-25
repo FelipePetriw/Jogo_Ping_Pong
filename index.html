@@ -36,7 +36,7 @@
             canvasCtx.fillStyle = "#286047"; //Definição da cor de fundo.
             canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight); //Definição do local da cor de fundo sobre a página.
 
-            canvasCtx.fillStyle = "#ffffff"; //Definição da cor da linha central.
+            canvasCtx.fillStyle = "#ffffff"; //Definição da cor da linha central, raquetes e bolinha.
 
             //Desenha a linha central.
             canvasCtx.fillRect(
@@ -54,6 +54,11 @@
                 400,
                 lineWidth,
                 200);
+
+            //Desenhando a bolinha do jogo
+            canvasCtx.beginPath();
+            canvasCtx.arc(200, 300, 20, 0, 2 * Math.PI, false);
+            canvasCtx.fill();
         }
 
         //Desenhando os elementos do projeto.
