@@ -29,7 +29,7 @@
         //Objeto Campo (tela de fundo/gramado)
         const field = {
             w: window.innerWidth, //Definido a largura.
-            h: window.innerHeight, //Definido a largura.
+            h: window.innerHeight, //Definido a altura.
             draw: function () { //Chama a função de construção.
                 //Configurando o fundo (gramado).
                 canvasCtx.fillStyle = "#286047"; //Definição da cor de fundo.
@@ -102,13 +102,30 @@
 
         //Objeto Bolinha
         const ball = {
-            x: 300,
-            y: 200,
+            x: 0,
+            y: 0,
             r: 20,
+            directionX: 1,
+            directionY: 1,
+            _calcPosition: function () { //Verifica as laterais superior e inferior do campo
+                if(
+                    (this.y - this.r < 0 && this.directionY < 0) ||
+                    (this.y > field.h - this.r && this.directionY > 0)
+                ) {
+                    this._reverseY();//Reverte a direção Y da bolinha quando ela for menor do que a altura da tela.
+                    //THIS.R desconta o raio da circunferência para encostar na lateral
+                }
+            },
+            _reverseX: function () {
+                this.directionX *= -1;//Reverte a direção da bolinha em X
+            },
+            _reverseY: function () {
+                this.directionY *= -1; //Reverte a direção da bolinha em Y
+            },
             speed: 5, //Definição da velocidade da bolinha
             _move: function () { //Função de movimento da bolinha
-                this.x += 1 * this.speed; //Incrementa 1px (local) * a velocidade
-                this.y += 1 * this.speed;//Incrementa 1px (local) * a velocidade
+                this.x += this.directionX * this.speed; //Incrementa 1px (local) * a velocidade
+                this.y += this.directionY * this.speed;//Incrementa 1px (local) * a velocidade
             },
             draw: function () {  //Desenhando a bolinha do jogo
                 canvasCtx.fillStyle = "#ffffff";//Definição da cor da bolinha.
@@ -117,6 +134,7 @@
                 canvasCtx.fill();
                 // Como não existe um elemento em circulo é utilizado o Raio de PI para montar o elemento redondo.
 
+                this._calcPosition(); //Chama a função de reverter a direcção
                 this._move(); //Chama a função de movimento dentro do Draw
             }
         }
