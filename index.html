@@ -88,13 +88,13 @@
 
         //Objeto Placar
         const score = {
-            human: 1,
-            computer: 2,
+            human: 0,
+            computer: 0,
             increaseHuman: function () {
-                this.human++
+                this.human++ //Incrementa 1 ponto sobre o placar.
             },
             increaseComputer: function () {
-                this.computer++
+                this.computer++ //Incrementa 1 ponto sobre o placar.
             },
             draw: function () { //Desenhando o Placar
                 canvasCtx.font = "bold 72px Arial"; //Dados da fonte utilizada.
@@ -123,6 +123,18 @@
                         this._reverseX(); //Rebate a bola invertendo o sinal de X
                     } else { //Pontuar o jogador 1
                         score.increaseHuman();//Chama a função de incremento da pontuação.
+                        this._pointUp(); //Chama a função de inicio da partida.
+                    }
+                };
+
+                if (this.x < this.r + leftPaddle.w + gapX) { //Verifica se o Jogador 2 fez ponto (X < 0)
+                    if ( //Verifica se a raquete esquerda esta na posição Y da bola
+                        this.y + this.r > leftPaddle.y &&
+                        this.y - this.r < leftPaddle.y + leftPaddle.h
+                    ) {
+                        this._reverseX(); //Rebate a bola invertendo o sinal de X
+                    } else { //Pontuar o jogador 2
+                        score.increaseComputer();//Chama a função de incremento da pontuação.
                         this._pointUp(); //Chama a função de inicio da partida.
                     }
                 };
