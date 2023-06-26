@@ -24,7 +24,7 @@
             canvasCtx = canvasEl.getContext("2d"),
             gapX = 10;
 
-        const mouse = {x:0, y:0}; //Objeto mouse
+        const mouse = { x: 0, y: 0 }; //Objeto mouse
 
         //Objeto Campo (tela de fundo/gramado)
         const field = {
@@ -75,7 +75,7 @@
             y: 100,
             w: line.w,
             h: 200,
-            _move: function (){
+            _move: function () {
                 this.y = ball.y;
             },
             draw: function () {
@@ -90,6 +90,12 @@
         const score = {
             human: 1,
             computer: 2,
+            increaseHuman: function () {
+                this.human++
+            },
+            increaseComputer: function () {
+                this.computer++
+            },
             draw: function () { //Desenhando o Placar
                 canvasCtx.font = "bold 72px Arial"; //Dados da fonte utilizada.
                 canvasCtx.textAlign = "center"; //Alinhamento do texto.
@@ -105,10 +111,23 @@
             x: 0,
             y: 0,
             r: 20,
+            speed: 5, //Definição da velocidade da bolinha
             directionX: 1,
             directionY: 1,
             _calcPosition: function () { //Verifica as laterais superior e inferior do campo
-                if(
+                if (this.x > field.w - this.r - rightPaddle.w - gapX) { //Verifica se o Jogador 1 fez ponto (X > Largura do campo)
+                    if ( //Verifica se a raquete direita esta na posição Y da bola
+                        this.y + this.r > rightPaddle.y &&
+                        this.y + this.r < rightPaddle.y + rightPaddle.h
+                    ) {
+                        this._reverseX(); //Rebate a bola invertendo o sinal de X
+                    } else { //Pontuar o jogador 1
+                        score.increaseHuman();//Chama a função de incremento da pontuação.
+                        this._pointUp(); //Chama a função de inicio da partida.
+                    }
+                };
+
+                if (
                     (this.y - this.r < 0 && this.directionY < 0) ||
                     (this.y > field.h - this.r && this.directionY > 0)
                 ) {
@@ -122,7 +141,10 @@
             _reverseY: function () {
                 this.directionY *= -1; //Reverte a direção da bolinha em Y
             },
-            speed: 5, //Definição da velocidade da bolinha
+            _pointUp: function () { //Centralização da bolinha para inicio da partida
+                this.x = field.w / 2;
+                this.y = field.h / 2;
+            },
             _move: function () { //Função de movimento da bolinha
                 this.x += this.directionX * this.speed; //Incrementa 1px (local) * a velocidade
                 this.y += this.directionY * this.speed;//Incrementa 1px (local) * a velocidade
@@ -155,7 +177,7 @@
             score.draw();
 
             ball.draw();
-        }     
+        }
 
         //API e função para suavizar a movimentação da bolinha.
         window.animateFrame = (function () {
