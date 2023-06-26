@@ -95,12 +95,19 @@
             x: 300,
             y: 200,
             r: 20,
+            speed: 5, //Definição da velocidade da bolinha
+            _move: function () { //Função de movimento da bolinha
+                this.x += 1 * this.speed; //Incrementa 1px (local) * a velocidade
+                this.y += 1 * this.speed;//Incrementa 1px (local) * a velocidade
+            },
             draw: function () {  //Desenhando a bolinha do jogo
                 canvasCtx.fillStyle = "#ffffff";//Definição da cor da bolinha.
                 canvasCtx.beginPath();
                 canvasCtx.arc(this.x, this.y, this.r, 0, 2 * Math.PI, false);
                 canvasCtx.fill();
                 // Como não existe um elemento em circulo é utilizado o Raio de PI para montar o elemento redondo.
+
+                this._move(); //Chama a função de movimento dentro do Draw
             }
         }
 
@@ -120,13 +127,13 @@
             score.draw();
 
             ball.draw();
-
-
         }
 
         //Desenhando os elementos do projeto.
         setup();
         draw();
+
+        window.setInterval(draw, 1000 / 60);
     </script>
 </body>
 
