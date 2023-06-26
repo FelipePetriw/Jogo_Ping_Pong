@@ -24,7 +24,7 @@
             canvasCtx = canvasEl.getContext("2d"),
             gapX = 10;
 
-        const lineWidth = 15; //Largura da linha central do campo
+        const mouse = {x:0, y:0}; //Objeto mouse
 
         //Objeto Campo (tela de fundo/gramado)
         const field = {
@@ -39,7 +39,7 @@
 
         //Objeto Linha Central
         const line = {
-            w: 15,
+            w: 15, //Largura da linha central do campo
             h: field.h,
             draw: function () {
                 canvasCtx.fillStyle = "#ffffff"; //Definição da cor da linha.
@@ -55,12 +55,17 @@
         //Objeto Raquete Esquerda
         const leftPaddle = {
             x: gapX,
-            y: 100,
+            y: 0,
             w: line.w,
             h: 200,
+            _move: function () { //Função de movimentação
+                this.y = mouse.y - this.h / 2; //divisão feita para centralizar o mouse ao meio da raquete.
+            },
             draw: function () {
                 canvasCtx.fillStyle = "#ffffff";//Definição da cor da raquete.
                 canvasCtx.fillRect(this.x, this.y, this.w, this.h); //Desenhando a raquete esquerda
+
+                this._move(); //Chama a função de movimento da raquete conforme mouse.
             }
         }
 
@@ -151,6 +156,13 @@
         //Desenhando os elementos do projeto.
         setup();
         main();
+
+        canvasEl.addEventListener("mousemove", function (e) {
+            mouse.x = e.pageX;
+            mouse.y = e.pageY;
+
+            console.log(mouse)
+        })
     </script>
 </body>
 
