@@ -111,7 +111,7 @@
             x: 0,
             y: 0,
             r: 20,
-            speed: 5, //Definição da velocidade da bolinha
+            speed: 2, //Definição da velocidade da bolinha
             directionX: 1,
             directionY: 1,
             _calcPosition: function () { //Verifica as laterais superior e inferior do campo
@@ -153,7 +153,12 @@
             _reverseY: function () {
                 this.directionY *= -1; //Reverte a direção da bolinha em Y
             },
+            _speedUp: function() { //Função de incremento de velocidade após a pontuação de algum jogador
+                this.speed += 1; //3 é o valor a ser incrementado na velocidade após a pontuação de algum jogador
+            },
             _pointUp: function () { //Centralização da bolinha para inicio da partida
+                this._speedUp(); 
+                
                 this.x = field.w / 2;
                 this.y = field.h / 2;
             },
