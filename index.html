@@ -33,7 +33,7 @@
             draw: function () { //Chama a função de construção.
                 //Configurando o fundo (gramado).
                 canvasCtx.fillStyle = "#286047"; //Definição da cor de fundo.
-                canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight); //Definição do local da cor de fundo sobre a página.
+                canvasCtx.fillRect(0, 0, this.w, this.h); //Definição do local da cor de fundo sobre a página.
             }
         }
 
@@ -72,7 +72,7 @@
         //Objeto Raquete Direita
         const rightPaddle = {
             x: field.w - line.w - gapX,
-            y: 100,
+            y: 0,
             w: line.w,
             h: 200,
             speed: 5, //Velocidade da raquete
@@ -83,13 +83,12 @@
                     this.y -= this.speed;
                 }
             },
-            speedUp: function (){
-                this.speed += 1; //Valor a ser incrementado na raquete.
+            speedUp: function () {
+                this.speed += 2; //Valor a ser incrementado na raquete.
             },
             draw: function () {
                 canvasCtx.fillStyle = "#ffffff";//Definição da cor da raquete.
                 canvasCtx.fillRect(this.x, this.y, this.w, this.h); //Desenhando a raquete esquerda
-
                 this._move();
             }
         }
@@ -116,8 +115,8 @@
 
         //Objeto Bolinha
         const ball = {
-            x: 0,
-            y: 0,
+            x: field.w / 2,
+            y: field.h / 2,
             r: 20,
             speed: 5, //Definição da velocidade da bolinha
             directionX: 1,
@@ -161,8 +160,8 @@
             _reverseY: function () {
                 this.directionY *= -1; //Reverte a direção da bolinha em Y
             },
-            _speedUp: function() { //Função de incremento de velocidade após a pontuação de algum jogador
-                this.speed += 2; //3 é o valor a ser incrementado na velocidade após a pontuação de algum jogador
+            _speedUp: function () { //Função de incremento de velocidade após a pontuação de algum jogador
+                this.speed += 2; //2 é o valor a ser incrementado na velocidade após a pontuação de algum jogador
             },
             _pointUp: function () { //Centralização da bolinha para inicio da partida
                 this._speedUp(); //Chama a função de incremento de velocidade.
@@ -189,8 +188,8 @@
 
         function setup() {
             // Configurando o tamanho do fundo do jogo (gramado).
-            canvasEl.width = canvasCtx.width = window.innerWidth;
-            canvasEl.height = canvasCtx.height = window.innerHeight;
+            canvasEl.width = canvasCtx.width = field.w;
+            canvasEl.height = canvasCtx.height = field.h;
         }
 
         function draw() {
@@ -231,8 +230,6 @@
         canvasEl.addEventListener("mousemove", function (e) {
             mouse.x = e.pageX;
             mouse.y = e.pageY;
-
-            console.log(mouse)
         })
     </script>
 </body>
