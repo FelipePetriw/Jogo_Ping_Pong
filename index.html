@@ -75,8 +75,16 @@
             y: 100,
             w: line.w,
             h: 200,
+            speed: 5, //Velocidade da raquete
             _move: function () {
-                this.y = ball.y;
+                if (this.y + this.h / 2 < ball.y + ball.r) {
+                    this.y += this.speed;
+                } else {
+                    this.y -= this.speed;
+                }
+            },
+            speedUp: function (){
+                this.speed += 1; //Valor a ser incrementado na raquete.
             },
             draw: function () {
                 canvasCtx.fillStyle = "#ffffff";//Definição da cor da raquete.
@@ -111,7 +119,7 @@
             x: 0,
             y: 0,
             r: 20,
-            speed: 2, //Definição da velocidade da bolinha
+            speed: 5, //Definição da velocidade da bolinha
             directionX: 1,
             directionY: 1,
             _calcPosition: function () { //Verifica as laterais superior e inferior do campo
@@ -154,11 +162,12 @@
                 this.directionY *= -1; //Reverte a direção da bolinha em Y
             },
             _speedUp: function() { //Função de incremento de velocidade após a pontuação de algum jogador
-                this.speed += 1; //3 é o valor a ser incrementado na velocidade após a pontuação de algum jogador
+                this.speed += 2; //3 é o valor a ser incrementado na velocidade após a pontuação de algum jogador
             },
             _pointUp: function () { //Centralização da bolinha para inicio da partida
                 this._speedUp(); //Chama a função de incremento de velocidade.
-                
+                rightPaddle.speedUp(); //Chama a função para incremento de velocidade da raquete.
+
                 this.x = field.w / 2;
                 this.y = field.h / 2;
             },
